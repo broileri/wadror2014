@@ -1,0 +1,77 @@
+irb(main):001:0> Brewery.create name:"Hartwall", year:1234
+   (0.1ms)  begin transaction
+  SQL (2.9ms)  INSERT INTO "breweries" ("created_at", "name", "updated_at", "year") VALUES (?, ?, ?, ?)  [["created_at", Mon, 13 Jan 2014 19:24:13 UTC +00:00], ["name", "Hartwall"], ["updated_at", Mon, 13 Jan 2014 19:24:13 UTC +00:00], ["year", 1234]]
+   (79.3ms)  commit transaction
+=> #<Brewery id: 4, name: "Hartwall", year: 1234, created_at: "2014-01-13 19:24:13", updated_at: "2014-01-13 19:24:13">
+irb(main):002:0> Brewery.find_by name:"Hartwall"
+  Brewery Load (0.4ms)  SELECT "breweries".* FROM "breweries" WHERE "breweries"."name" = 'Hartwall' LIMIT 1
+=> #<Brewery id: 4, name: "Hartwall", year: 1234, created_at: "2014-01-13 19:24:13", updated_at: "2014-01-13 19:24:13">
+irb(main):003:0> h = Brewery.find_by name:"Hartwall"
+  Brewery Load (0.3ms)  SELECT "breweries".* FROM "breweries" WHERE "breweries"."name" = 'Hartwall' LIMIT 1
+=> #<Brewery id: 4, name: "Hartwall", year: 1234, created_at: "2014-01-13 19:24:13", updated_at: "2014-01-13 19:24:13">
+irb(main):004:0> b = Beer.new name:"Kalia", style:"Lager"
+=> #<Beer id: nil, name: "Kalia", style: "Lager", brewery_id: nil, created_at: nil, updated_at: nil>
+irb(main):005:0> b.brewery = h
+=> #<Brewery id: 4, name: "Hartwall", year: 1234, created_at: "2014-01-13 19:24:13", updated_at: "2014-01-13 19:24:13">
+irb(main):006:0> b.save
+   (0.2ms)  begin transaction
+  SQL (0.7ms)  INSERT INTO "beers" ("brewery_id", "created_at", "name", "style", "updated_at") VALUES (?, ?, ?, ?, ?)  [["brewery_id", 4], ["created_at", Mon, 13 Jan 2014 19:31:01 UTC +00:00], ["name", "Kalia"], ["style", "Lager"], ["updated_at", Mon, 13 Jan 2014 19:31:01 UTC +00:00]]
+   (36.4ms)  commit transaction
+=> true
+irb(main):007:0> h.beers.include? b
+  Beer Exists (0.2ms)  SELECT 1 AS one FROM "beers" WHERE "beers"."brewery_id" = ? AND "beers"."id" = 11 LIMIT 1  [["brewery_id", 4]]
+=> true
+irb(main):008:0> b = Beer.new name:"Kalia2", style:"Lager"
+=> #<Beer id: nil, name: "Kalia2", style: "Lager", brewery_id: nil, created_at: nil, updated_at: nil>
+irb(main):009:0> h.beers << b
+   (0.1ms)  begin transaction
+  SQL (1.0ms)  INSERT INTO "beers" ("brewery_id", "created_at", "name", "style", "updated_at") VALUES (?, ?, ?, ?, ?)  [["brewery_id", 4], ["created_at", Mon, 13 Jan 2014 19:32:12 UTC +00:00], ["name", "Kalia2"], ["style", "Lager"], ["updated_at", Mon, 13 Jan 2014 19:32:12 UTC +00:00]]
+   (48.1ms)  commit transaction
+  Beer Load (0.2ms)  SELECT "beers".* FROM "beers" WHERE "beers"."brewery_id" = ?  [["brewery_id", 4]]
+=> #<ActiveRecord::Associations::CollectionProxy [#<Beer id: 11, name: "Kalia", style: "Lager", brewery_id: 4, created_at: "2014-01-13 19:31:01", updated_at: "2014-01-13 19:31:01">, #<Beer id: 12, name: "Kalia2", style: "Lager", brewery_id: 4, created_at: "2014-01-13 19:32:12", updated_at: "2014-01-13 19:32:12">]>
+irb(main):010:0> h.beers.create name:"Kalia3", style:"Lager"
+   (0.2ms)  begin transaction
+  SQL (0.9ms)  INSERT INTO "beers" ("brewery_id", "created_at", "name", "style", "updated_at") VALUES (?, ?, ?, ?, ?)  [["brewery_id", 4], ["created_at", Mon, 13 Jan 2014 19:32:54 UTC +00:00], ["name", "Kalia3"], ["style", "Lager"], ["updated_at", Mon, 13 Jan 2014 19:32:54 UTC +00:00]]
+   (44.3ms)  commit transaction
+=> #<Beer id: 13, name: "Kalia3", style: "Lager", brewery_id: 4, created_at: "2014-01-13 19:32:54", updated_at: "2014-01-13 19:32:54">
+irb(main):011:0> h.beers.count
+   (0.3ms)  SELECT COUNT(*) FROM "beers" WHERE "beers"."brewery_id" = ?  [["brewery_id", 4]]
+=> 3
+
+
+
+irb(main):013:0> r = Brewery.find_by id: 4
+  Brewery Load (0.3ms)  SELECT "breweries".* FROM "breweries" WHERE "breweries"."id" = 4 LIMIT 1
+=> #<Brewery id: 4, name: "Hartwall", year: 1891, created_at: "2014-01-13 19:51:14", updated_at: "2014-01-13 19:51:14">
+irb(main):014:0> r.destroy
+   (0.2ms)  begin transaction
+  SQL (0.4ms)  DELETE FROM "breweries" WHERE "breweries"."id" = ?  [["id", 4]]
+   (34.7ms)  commit transaction
+=> #<Brewery id: 5, name: "Hartwall", year: 1891, created_at: "2014-01-13 19:51:14", updated_at: "2014-01-13 19:51:14">
+irb(main):015:0> reload!
+Reloading...
+=> true
+irb(main):016:0> Brewery.all
+  Brewery Load (0.6ms)  SELECT "breweries".* FROM "breweries"
+=> #<ActiveRecord::Relation [#<Brewery id: 1, name: "Koff", year: 1897, created_at: "2014-01-13 19:15:11", updated_at: "2014-01-13 19:15:11">, #<Brewery id: 2, name: "Malmgard", year: 2001, created_at: "2014-01-13 19:15:11", updated_at: "2014-01-13 19:15:11">, #<Brewery id: 3, name: "Weihenstephaner", year: 1042, created_at: "2014-01-13 19:15:11", updated_at: "2014-01-13 19:15:11">]>
+irb(main):017:0> 
+
+
+
+irb(main):018:0> arr = Beer.where brewery_id: 4
+  Beer Load (0.3ms)  SELECT "beers".* FROM "beers" WHERE "beers"."brewery_id" = 4
+=> #<ActiveRecord::Relation [#<Beer id: 11, name: "Kalia", style: "Lager", brewery_id: 4, created_at: "2014-01-13 19:31:01", updated_at: "2014-01-13 19:31:01">, #<Beer id: 12, name: "Kalia2", style: "Lager", brewery_id: 4, created_at: "2014-01-13 19:32:12", updated_at: "2014-01-13 19:32:12">, #<Beer id: 13, name: "Kalia3", style: "Lager", brewery_id: 4, created_at: "2014-01-13 19:32:54", updated_at: "2014-01-13 19:32:54">]>
+irb(main):019:0> arr.each { |alkio| alkio.destroy }
+   (0.1ms)  begin transaction
+  SQL (0.2ms)  DELETE FROM "beers" WHERE "beers"."id" = ?  [["id", 11]]
+   (23.2ms)  commit transaction
+   (0.1ms)  begin transaction
+  SQL (0.3ms)  DELETE FROM "beers" WHERE "beers"."id" = ?  [["id", 12]]
+   (31.0ms)  commit transaction
+   (0.1ms)  begin transaction
+  SQL (0.2ms)  DELETE FROM "beers" WHERE "beers"."id" = ?  [["id", 13]]
+   (11.0ms)  commit transaction
+=> [#<Beer id: 11, name: "Kalia", style: "Lager", brewery_id: 4, created_at: "2014-01-13 19:31:01", updated_at: "2014-01-13 19:31:01">, #<Beer id: 12, name: "Kalia2", style: "Lager", brewery_id: 4, created_at: "2014-01-13 19:32:12", updated_at: "2014-01-13 19:32:12">, #<Beer id: 13, name: "Kalia3", style: "Lager", brewery_id: 4, created_at: "2014-01-13 19:32:54", updated_at: "2014-01-13 19:32:54">]
+irb(main):020:0> 
+
+
