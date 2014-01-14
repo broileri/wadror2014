@@ -64,7 +64,7 @@ class BeersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_beer
-      @beer = Beer.find(params[:id])
+      @beer = Beer.find(params[:id]).order(:brewery_id)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
