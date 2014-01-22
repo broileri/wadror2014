@@ -1,0 +1,80 @@
+irb(main):013:0> b = Brewery.create name: "BrewDog", year: 2007
+   (0.2ms)  begin transaction
+  SQL (23.4ms)  INSERT INTO "breweries" ("created_at", "name", "updated_at", "year") VALUES (?, ?, ?, ?)  [["created_at", Wed, 22 Jan 2014 19:05:35 UTC +00:00], ["name", "BrewDog"], ["updated_at", Wed, 22 Jan 2014 19:05:35 UTC +00:00], ["year", 2007]]
+   (31.3ms)  commit transaction
+=> #<Brewery id: 4, name: "BrewDog", year: 2007, created_at: "2014-01-22 19:05:35", updated_at: "2014-01-22 19:05:35">
+irb(main):014:0> tp Brewery.all
+  Brewery Load (0.8ms)  SELECT "breweries".* FROM "breweries"
+ID | NAME            | YEAR | CREATED_AT              | UPDATED_AT             
+---|-----------------|------|-------------------------|------------------------
+1  | Koff            | 1897 | 2014-01-14 15:42:57     | 2014-01-14 15:42:57    
+2  | Malmgard        | 2001 | 2014-01-14 15:42:57     | 2014-01-14 15:42:57    
+3  | Weihenstephaner | 1042 | 2014-01-14 15:42:57     | 2014-01-14 15:42:57    
+4  | BrewDog         | 2007 | 2014-01-22 19:05:35     | 2014-01-22 19:05:35    
+=> 0.009293224
+irb(main):015:0> b.beers.create name: "Punk IPA", style: "IPA"
+   (0.0ms)  begin transaction
+  SQL (0.5ms)  INSERT INTO "beers" ("brewery_id", "created_at", "name", "style", "updated_at") VALUES (?, ?, ?, ?, ?)  [["brewery_id", 4], ["created_at", Wed, 22 Jan 2014 19:09:20 UTC +00:00], ["name", "Punk IPA"], ["style", "IPA"], ["updated_at", Wed, 22 Jan 2014 19:09:20 UTC +00:00]]
+   (23.0ms)  commit transaction
+=> #<Beer id: 8, name: "Punk IPA", style: "IPA", brewery_id: 4, created_at: "2014-01-22 19:09:20", updated_at: "2014-01-22 19:09:20">
+irb(main):016:0> b.beers.create name: "Nanny State", style: "lowalcohol"
+   (0.2ms)  begin transaction
+  SQL (2.0ms)  INSERT INTO "beers" ("brewery_id", "created_at", "name", "style", "updated_at") VALUES (?, ?, ?, ?, ?)  [["brewery_id", 4], ["created_at", Wed, 22 Jan 2014 19:09:56 UTC +00:00], ["name", "Nanny State"], ["style", "lowalcohol"], ["updated_at", Wed, 22 Jan 2014 19:09:56 UTC +00:00]]
+   (37.1ms)  commit transaction
+=> #<Beer id: 9, name: "Nanny State", style: "lowalcohol", brewery_id: 4, created_at: "2014-01-22 19:09:56", updated_at: "2014-01-22 19:09:56">
+irb(main):017:0> tp b.beers
+  Beer Load (0.4ms)  SELECT "beers".* FROM "beers" WHERE "beers"."brewery_id" = ?  [["brewery_id", 4]]
+ID | NAME        | STYLE      | BREWERY_ID | CREATED_AT              | UPDATED_AT             
+---|-------------|------------|------------|-------------------------|------------------------
+8  | Punk IPA    | IPA        | 4          | 2014-01-22 19:09:20     | 2014-01-22 19:09:20    
+9  | Nanny State | lowalcohol | 4          | 2014-01-22 19:09:56     | 2014-01-22 19:09:56    
+=> 0.00431523
+irb(main):018:0> p = b.beers.first
+=> #<Beer id: 8, name: "Punk IPA", style: "IPA", brewery_id: 4, created_at: "2014-01-22 19:09:20", updated_at: "2014-01-22 19:09:20">
+irb(main):019:0> p.ratings.create score: 11
+   (0.2ms)  begin transaction
+  SQL (0.6ms)  INSERT INTO "ratings" ("beer_id", "created_at", "score", "updated_at") VALUES (?, ?, ?, ?)  [["beer_id", 8], ["created_at", Wed, 22 Jan 2014 19:19:56 UTC +00:00], ["score", 11], ["updated_at", Wed, 22 Jan 2014 19:19:56 UTC +00:00]]
+   (39.4ms)  commit transaction
+=> #<Rating id: 4, score: 11, beer_id: 8, created_at: "2014-01-22 19:19:56", updated_at: "2014-01-22 19:19:56">
+irb(main):020:0> p.ratings.create score: 56
+   (0.2ms)  begin transaction
+  SQL (0.5ms)  INSERT INTO "ratings" ("beer_id", "created_at", "score", "updated_at") VALUES (?, ?, ?, ?)  [["beer_id", 8], ["created_at", Wed, 22 Jan 2014 19:20:01 UTC +00:00], ["score", 56], ["updated_at", Wed, 22 Jan 2014 19:20:01 UTC +00:00]]
+   (26.9ms)  commit transaction
+=> #<Rating id: 5, score: 56, beer_id: 8, created_at: "2014-01-22 19:20:01", updated_at: "2014-01-22 19:20:01">
+irb(main):021:0> p.ratings.create score: 25
+   (0.1ms)  begin transaction
+  SQL (0.3ms)  INSERT INTO "ratings" ("beer_id", "created_at", "score", "updated_at") VALUES (?, ?, ?, ?)  [["beer_id", 8], ["created_at", Wed, 22 Jan 2014 19:20:07 UTC +00:00], ["score", 25], ["updated_at", Wed, 22 Jan 2014 19:20:07 UTC +00:00]]
+   (20.6ms)  commit transaction
+=> #<Rating id: 6, score: 25, beer_id: 8, created_at: "2014-01-22 19:20:07", updated_at: "2014-01-22 19:20:07">
+irb(main):026:0> n = b.beers.last
+=> #<Beer id: 9, name: "Nanny State", style: "lowalcohol", brewery_id: 4, created_at: "2014-01-22 19:09:56", updated_at: "2014-01-22 19:09:56">
+irb(main):027:0> n.ratings.create score: 20
+   (0.2ms)  begin transaction
+  SQL (2.2ms)  INSERT INTO "ratings" ("beer_id", "created_at", "score", "updated_at") VALUES (?, ?, ?, ?)  [["beer_id", 9], ["created_at", Wed, 22 Jan 2014 19:26:40 UTC +00:00], ["score", 20], ["updated_at", Wed, 22 Jan 2014 19:26:40 UTC +00:00]]
+   (54.6ms)  commit transaction
+=> #<Rating id: 7, score: 20, beer_id: 9, created_at: "2014-01-22 19:26:40", updated_at: "2014-01-22 19:26:40">
+irb(main):028:0> n.ratings.create score: 55
+   (0.1ms)  begin transaction
+  SQL (0.5ms)  INSERT INTO "ratings" ("beer_id", "created_at", "score", "updated_at") VALUES (?, ?, ?, ?)  [["beer_id", 9], ["created_at", Wed, 22 Jan 2014 19:26:47 UTC +00:00], ["score", 55], ["updated_at", Wed, 22 Jan 2014 19:26:47 UTC +00:00]]
+   (19.9ms)  commit transaction
+=> #<Rating id: 8, score: 55, beer_id: 9, created_at: "2014-01-22 19:26:47", updated_at: "2014-01-22 19:26:47">
+irb(main):029:0> n.ratings.create score: 99
+   (0.2ms)  begin transaction
+  SQL (0.5ms)  INSERT INTO "ratings" ("beer_id", "created_at", "score", "updated_at") VALUES (?, ?, ?, ?)  [["beer_id", 9], ["created_at", Wed, 22 Jan 2014 19:26:56 UTC +00:00], ["score", 99], ["updated_at", Wed, 22 Jan 2014 19:26:56 UTC +00:00]]
+   (20.7ms)  commit transaction
+=> #<Rating id: 9, score: 99, beer_id: 9, created_at: "2014-01-22 19:26:56", updated_at: "2014-01-22 19:26:56">
+irb(main):030:0> tp Rating.all
+  Rating Load (0.4ms)  SELECT "ratings".* FROM "ratings"
+ID | SCORE | BEER_ID | CREATED_AT              | UPDATED_AT             
+---|-------|---------|-------------------------|------------------------
+1  | 10    | 1       | 2014-01-22 16:44:37     | 2014-01-22 16:44:37    
+2  | 21    | 1       | 2014-01-22 16:44:46     | 2014-01-22 16:44:46    
+3  | 17    | 1       | 2014-01-22 16:44:57     | 2014-01-22 16:44:57    
+4  | 11    | 8       | 2014-01-22 19:19:56     | 2014-01-22 19:19:56    
+5  | 56    | 8       | 2014-01-22 19:20:01     | 2014-01-22 19:20:01    
+6  | 25    | 8       | 2014-01-22 19:20:07     | 2014-01-22 19:20:07    
+7  | 20    | 9       | 2014-01-22 19:26:40     | 2014-01-22 19:26:40    
+8  | 55    | 9       | 2014-01-22 19:26:47     | 2014-01-22 19:26:47    
+9  | 99    | 9       | 2014-01-22 19:26:56     | 2014-01-22 19:26:56    
+=> 0.046904021
+irb(main):031:0>
