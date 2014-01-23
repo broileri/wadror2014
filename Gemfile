@@ -30,6 +30,11 @@ gem 'jbuilder', '~> 1.2'
 # Show database searches in console in a readable format
 gem 'table_print'
 
+# Debugger
+gem 'byebug', group: [:development, :test]
+
+
+
 group :development, :test do
   gem 'sqlite3'
 end
