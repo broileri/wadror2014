@@ -9,9 +9,7 @@ class User < ActiveRecord::Base
   validates :password, presence: true,
                        :format => {:with => /\A(?=.*[A-Z])(?=.*[0-9]).{3,}\z/,
                        message: "password length must be at least 3 characters and it must contain one number and one upper case letter"}
-  validates :beer_club_id, uniqueness: true
-
-
+  
   has_many :ratings, dependent: :destroy
   has_many :beers, through: :ratings
   has_many :memberships, dependent: :destroy
