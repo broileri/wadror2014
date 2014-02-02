@@ -1,4 +1,6 @@
-<h1>Editing user</h1>
+<% if not @user.new_record? %>
+<h1>Changing password of <%= current_user %></h1>
+<% end %>
 
 <%= render 'form' %>
 

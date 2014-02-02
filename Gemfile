@@ -33,6 +33,9 @@ gem 'table_print'
 # Debugger
 gem 'byebug', group: [:development, :test]
 
+# Password digest
+gem 'bcrypt-ruby', '~> 3.1.2'
+
 
 
 group :development, :test do

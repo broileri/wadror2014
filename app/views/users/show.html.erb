@@ -11,18 +11,42 @@
     <% end %>
 </p>
 
+<br>
+
 <h2>
 	<%= @user.username %>'s ratings
 </h2>
 
 <ul>
-	<% @user.ratings.each do |rating| %>
-		<li>
-			<%= rating %>
-			<%= link_to 'Destroy', rating, method: :delete, data: { confirm: 'Are you sure?' } %>
-		</li>     
+    <% @user.ratings.each do |rating| %>
+      <li> 
+        <%= rating %> 
+        <% if @user == current_user %>
+            <%= link_to 'delete', rating, method: :delete, data: { confirm: 'Are you sure?' } %> 
+        <% end %>
+      </li>
     <% end %>
 </ul>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
+<br>
+
+<h2>
+	<%= @user.username %>'s memberships
+</h2>
+
+<ul>
+	<% @user.memberships.each do |mship| %>
+	   <li>
+	   	   <%= link_to mship.beer_club, mship.beer_club %>
+	   </li>
+	<% end %>
+</ul>
+
+
+
 <%= link_to 'Back', users_path %>
+<% if @user == current_user %>
+  |
+  <%= link_to 'Edit', edit_user_path(@user) %> |
+  <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>
