@@ -1,4 +1,4 @@
-== README
+<h1> READ ME </h1>
 
 http://ratethembeerz.herokuapp.com/breweries
 
