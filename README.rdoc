@@ -1,3 +1,0 @@
-== README
-
-http://ratethembeerz.herokuapp.com/breweries
