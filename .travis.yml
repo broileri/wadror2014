@@ -10,7 +10,9 @@ script:
  - bundle exec rspec -fd spec/
 
 deploy:
- provider: heroku  
- api_key: dc09b5d8-78b3-4bee-9da3-b8fa4bdd94e3
- app: ratethembeerz
- run: "rake db:migrate"
+  provider: heroku  
+  api_key: dc09b5d8-78b3-4bee-9da3-b8fa4bdd94e3
+  app: ratethembeerz
+  run: "rake db:migrate"
+  on:
+    repo: broileri/wadror2014
