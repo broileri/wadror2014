@@ -19,4 +19,47 @@ class User < ActiveRecord::Base
     "#{username}"
   end
 
+  def favourite_beer
+    return nil if ratings.empty?
+    ratings.order(score: :desc).limit(1).first.beer
+  end
+
+  def favourite_style
+    return nil if ratings.empty?
+    count_average(group_ratings_by_style)
+  end
+
+  def favourite_brewery
+    return nil if ratings.empty?
+    count_average(group_ratings_by_brewery)
+      
+  end
+
+
+
+  private
+
+  def count_average(favourite)
+    favourite
+      .map{ |fav, ratings| [fav, avg_for_ratings(ratings)] }
+        .max_by { |fav, avg| avg }.first
+  end
+
+  def group_ratings_by_brewery
+    Rating.all.group_by { |b| b.beer.brewery }
+  end
+
+  def group_ratings_by_style
+    Rating.all.group_by { |b| b.beer.style }
+  end
+
+  def avg_for_ratings(ratings)
+    ratings.inject(0) { |sum,rating| sum + rating.score } / ratings.count
+  end
+
+  def average_score_of_beer(beer)
+    sum = beer.ratings.sum :score
+    avg = (sum / beer.ratings.count.to_f).round(2)
+  end
+
 end

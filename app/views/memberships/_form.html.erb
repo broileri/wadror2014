@@ -11,15 +11,18 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :beer_club_id %><br>
-    <%= f.select :beer_club_id, options_from_collection_for_select(@beer_clubs, :id, :to_s) %>
-  </div>
-  <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.select :user_id, options_for_select([[current_user.username, current_user.id]]) %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <% if not @beer_clubs.empty? %>
+    <div class="field">
+      <%= f.label :beer_club_id %><br>
+      <%= f.select :beer_club_id, options_from_collection_for_select(@beer_clubs, :id, :to_s) %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  <% else %>
+    <p>
+      You're already a member in all available clubs!
+    </p>
+  <% end %>
+  
 <% end %>
