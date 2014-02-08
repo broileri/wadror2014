@@ -9,9 +9,8 @@ script:
  - bundle exec rake db:test:prepare
  - bundle exec rspec -fd spec/
 
- deploy:
-  provider: heroku  
-  api_key: dc09b5d8-78b3-4bee-9da3-b8fa4bdd94e3
-  app: ratethembeerz
-  run:
-    - "rake db:migrate"
+deploy:
+ provider: heroku  
+ api_key: dc09b5d8-78b3-4bee-9da3-b8fa4bdd94e3
+ app: ratethembeerz
+ run: "rake db:migrate"
