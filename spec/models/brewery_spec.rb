@@ -17,6 +17,7 @@ describe Brewery do
   end
 
   it "reminder for classes" do
+  	
   	BeerClub
     BeerClubsController
     MembershipsController
