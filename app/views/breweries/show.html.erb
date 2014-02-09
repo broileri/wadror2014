@@ -30,3 +30,5 @@
 <%= link_to 'Edit', edit_brewery_path(@brewery) if current_user %>
 <%= "|" if current_user %>
 <%= link_to 'Back', breweries_path %>
+<%= "|" if current_is_admin %>
+<%= link_to 'Destroy Brewery', @brewery, method: :delete, data: { confirm: 'Are you sure?' } if current_is_admin %>
