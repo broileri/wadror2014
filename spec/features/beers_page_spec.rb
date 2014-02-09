@@ -3,6 +3,11 @@ require 'spec_helper'
 include OwnTestHelper
 
 describe "Beers page" do
+  let!(:user) { FactoryGirl.create :user }
+
+  before :each do
+    sign_in(username:"Pekka", password:"Foobar1")
+  end
   
 
   it "should allow adding a new beer to database if beer is given a proper name" do

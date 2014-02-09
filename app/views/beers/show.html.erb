@@ -1,9 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
+<h1>  
   <%= @beer.name %>
-</p>
+</h1>
 
 <p>
   <strong>Style:</strong>
@@ -23,5 +22,6 @@
     <% end %>
 </p>
 
-<%= link_to 'Edit', edit_beer_path(@beer) %> |
+<%= link_to 'Edit', edit_beer_path(@beer) if current_user %>
+<%= "|" if current_user %>
 <%= link_to 'Back', beers_path %>
