@@ -19,6 +19,13 @@ Ratebeer::Application.routes.draw do
   
   delete 'signout', to: 'sessions#destroy'
 
+  resources :places, only:[:index, :show]
+  # mikä generoi samat polut kuin seuraavat kaksi     
+  # get 'places', to:'places#index'
+  # get 'places/:id', to:'places#show'
+
+  post 'places', to:'places#search'
+
   # get 'ratings', to: 'ratings#index'
 
   # get 'ratings/new', to:'ratings#new'

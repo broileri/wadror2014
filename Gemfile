@@ -36,12 +36,19 @@ gem 'byebug', group: [:development, :test]
 # Password digest
 gem 'bcrypt-ruby', '~> 3.1.2'
 
+# HTTP request helper
+gem 'httparty'
+
+# Saving API key
+gem "rails-settings-cached", "0.3.1"
+
 
 group :test do
   gem 'rspec-rails', '~> 2.14.1'
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'launchy'
+  gem 'webmock'
   # Line coverage
   gem 'simplecov', require: false
 end
