@@ -20,6 +20,17 @@
 	   </li>
 	<% end %>
 </ul>
+<br><br>
+
+
+<% if current_user %>
+<% if @beer_club.memberships - current_user.memberships == @beer_club.memberships || @beer_club.memberships.empty? %>
+  <%= form_for(@membership) do |f| %>
+    <%= f.hidden_field :beer_club_id %>
+    <%= f.submit value:"Join the Club" %>
+  <% end %>
+  <% end %>
+<% end %>
 
 
 <%= link_to 'Edit', edit_beer_club_path(@beer_club) if current_user %>

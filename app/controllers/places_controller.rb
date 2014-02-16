@@ -1,5 +1,11 @@
 class PlacesController < ApplicationController
+
   def index
+  end
+
+  def show
+    @place = BeermappingApi.place(params[:id])
+    @score = BeermappingApi.score(params[:id])
   end
 
   def search
@@ -9,5 +15,6 @@ class PlacesController < ApplicationController
     else
       render :index
     end
-  end
+  end  
+
 end

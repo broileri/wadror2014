@@ -1,0 +1,35 @@
+<% if not @place.nil? %>
+	<% if not @place.name == "No locations Found" %>
+
+	  <h1>
+	  	<%= @place.name %>
+	  </h1>
+	  <p>
+		  <em><%= @place.status %></em><br>
+		  <%= @place.street %><br>
+		  <%= @place.city %>
+	  </p>
+	  <h2>
+	  	Scores
+	  </h2>
+	  <p>
+	  	<% @score.each do |key, value| %>
+	  	<em>
+	  		<%= key + ": " %>
+	  	</em>
+	  	<%= value %> <br>
+	  	<% end %>
+	  </p>
+
+	  <iframe src=<%= @place.blogmap %>/>
+
+    <% else %>
+
+	  <h1>Oops...</h1>
+	  <br><br>
+	  <h2>...something went wrong!</h2>
+	  <br><br>
+	  <p>:(</p>
+
+	<% end %>
+<% end %>

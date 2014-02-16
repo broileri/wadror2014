@@ -26,12 +26,12 @@ class User < ActiveRecord::Base
 
   def favourite_style
     return nil if ratings.empty?
-    count_average(group_ratings_by_style)
+    count_average(group_ratings(:style))
   end
 
   def favourite_brewery
     return nil if ratings.empty?
-    count_average(group_ratings_by_brewery)
+    count_average(group_ratings(:brewery))
       
   end
 
@@ -45,21 +45,12 @@ class User < ActiveRecord::Base
         .max_by { |fav, avg| avg }.first
   end
 
-  def group_ratings_by_brewery
-    Rating.all.group_by { |b| b.beer.brewery }
-  end
-
-  def group_ratings_by_style
-    Rating.all.group_by { |b| b.beer.style }
+  def group_ratings(category)
+    Rating.all.group_by { |b| b.beer.send(category) }
   end
 
   def avg_for_ratings(ratings)
     ratings.inject(0) { |sum,rating| sum + rating.score } / ratings.count
-  end
-
-  def average_score_of_beer(beer)
-    sum = beer.ratings.sum :score
-    avg = (sum / beer.ratings.count.to_f).round(2)
   end
 
 end
