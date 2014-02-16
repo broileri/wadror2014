@@ -6,8 +6,10 @@ describe "User page" do
   let!(:user2) { FactoryGirl.create :user, username:"Lupu" }
   let!(:brewery1) { FactoryGirl.create :brewery, name:"Koff" }
   let!(:brewery2) { FactoryGirl.create :brewery, name:"Olvi" }
-  let!(:beer1) { FactoryGirl.create :beer, name:"Iso 3", style:"Pale Ale", brewery:brewery1 }
-  let!(:beer2) { FactoryGirl.create :beer, name:"Alvi", style:"Lager", brewery:brewery2 }
+  let!(:style) { FactoryGirl.create :style }
+  let!(:style2) { FactoryGirl.create :style, name:"Pale Ale" }
+  let!(:beer1) { FactoryGirl.create :beer, name:"Iso 3", style:style, brewery:brewery1 }
+  let!(:beer2) { FactoryGirl.create :beer, name:"Alvi", style:style2, brewery:brewery2 }
   let!(:rating1) { FactoryGirl.create :rating, score:"11", beer:beer1, user:user1 }
   let!(:rating2) { FactoryGirl.create :rating, score:"23", beer:beer1, user:user2 }
   let!(:rating3) { FactoryGirl.create :rating, score:"6", beer:beer2, user:user1 }
@@ -40,7 +42,7 @@ describe "User page" do
   end
 
   it "shows the user's favourite style" do
-  	expect(page).to have_content "Favourite style: Pale Ale"   	
+  	expect(page).to have_content "Favourite style: Lager"   	
   end
 
   it "shows the user's favourite beer" do

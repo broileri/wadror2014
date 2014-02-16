@@ -89,6 +89,11 @@ describe User do
 
   describe "'s favourite style" do
   	let(:user){ FactoryGirl.create(:user) }
+    let!(:style1) { FactoryGirl.create :style, name:"Weizen" }
+    let!(:style2) { FactoryGirl.create :style, name:"Pale Ale" }
+    let!(:style3) { FactoryGirl.create :style, name:"IPA" }
+    let!(:style4) { FactoryGirl.create :style, name:"APU" }
+    let!(:style5) { FactoryGirl.create :style, name:"LOL" }
 
   	it "has a method for determining the favourite style" do
       user.should respond_to :favourite_style
@@ -105,16 +110,17 @@ describe User do
     end
 
     it "is the style with highest average rating if user has rated several beers" do
-      styles = ["Lager", "Pale Ale", "Pale Ale", "Lager", "IPA"]
+      styles = [style1, style2, style3, style4, style5]
       create_beers_with_ratings_and_styles(10, 20, 15, 7, 9, user, styles)      
 
-      user.favourite_style.should == "Pale Ale"
+      user.favourite_style.name.should == "Pale Ale"
     end
 
   end
 
   describe "'s favourite brewery" do
   	let(:user){ FactoryGirl.create(:user) }
+
 
   	it "has a method for determining the favourite brewery" do
       user.should respond_to :favourite_brewery
@@ -133,9 +139,9 @@ describe User do
       brewery1 = Brewery.create(name:"Eka", year:1999)
       brewery2 = Brewery.create(name:"Toka", year:1977)
       brewery3 = Brewery.create(name:"Kolmas", year:1895)
-      create_beers_with_ratings_and_brewery(10, 20, 15, 7, 9, user, brewery1)
-      create_beers_with_ratings_and_brewery(11, 21, 16, 17, 29, user, brewery2)
-      create_beers_with_ratings_and_brewery(1, 2, 1, 7, 2, user, brewery3)
+      create_beers_with_ratings_and_brewery(10, 20, 15, 7, 9, user, brewery1, "liemi1")
+      create_beers_with_ratings_and_brewery(11, 21, 16, 17, 29, user, brewery2, "liemi2")
+      create_beers_with_ratings_and_brewery(1, 2, 1, 7, 2, user, brewery3, "liemi3")
 
       expect(user.favourite_brewery).to eq(brewery2)
     end
@@ -146,14 +152,22 @@ describe User do
 
   
   def create_beer_with_rating(score, user)
-      beer = FactoryGirl.create(:beer)
+      style = FactoryGirl.create(:style, name:"litku")
+      beer = FactoryGirl.create(:beer, style:style)
+      FactoryGirl.create(:rating, score:score, beer:beer, user:user)
+      beer
+  end
+
+  def create_beer_with_ratings_helper(score, user, style)      
+      beer = FactoryGirl.create(:beer, style:style)
       FactoryGirl.create(:rating, score:score, beer:beer, user:user)
       beer
   end
 
   def create_beers_with_ratings(*scores, user)
+    style = FactoryGirl.create(:style, name:"mehu")
     scores.each do |score|
-      create_beer_with_rating(score, user)
+      create_beer_with_ratings_helper(score, user, style)
     end
   end
 
@@ -171,15 +185,16 @@ describe User do
     end
   end
 
-  def create_beer_with_rating_and_brewery(score, user, brewery)
-      beer = FactoryGirl.create(:beer, brewery:brewery)
+  def create_beer_with_rating_and_brewery(score, user, brewery, style)
+      beer = FactoryGirl.create(:beer, brewery:brewery, style:style)
       FactoryGirl.create(:rating, score:score, beer:beer, user:user)
       beer
   end
 
-  def create_beers_with_ratings_and_brewery(*scores, user, brewery)
+  def create_beers_with_ratings_and_brewery(*scores, user, brewery, st)
+    style = FactoryGirl.create(:style, name:st)
     scores.each do |score|
-      create_beer_with_rating_and_brewery(score, user, brewery)
+      create_beer_with_rating_and_brewery(score, user, brewery, style)
     end
   end
 end

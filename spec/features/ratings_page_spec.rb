@@ -5,8 +5,9 @@ describe "Ratings page" do
   let!(:user) { FactoryGirl.create :user, username:"Arvostelija" }
   let!(:brewery1) { FactoryGirl.create :brewery, name:"Koff" }
   let!(:brewery2) { FactoryGirl.create :brewery, name:"Olvi" }
-  let!(:beer1) { FactoryGirl.create :beer, name:"Iso 3", brewery:brewery1 }
-  let!(:beer2) { FactoryGirl.create :beer, name:"Alvi", brewery:brewery2 }
+  let!(:style) { FactoryGirl.create :style }
+  let!(:beer1) { FactoryGirl.create :beer, name:"Iso 3", brewery:brewery1, style:style }
+  let!(:beer2) { FactoryGirl.create :beer, name:"Alvi", brewery:brewery2, style:style }
   let!(:rating1) { FactoryGirl.create :rating, score:"11", beer:beer1, user:user }
   let!(:rating2) { FactoryGirl.create :rating, score:"23", beer:beer1, user:user }
   let!(:rating3) { FactoryGirl.create :rating, score:"6", beer:beer2, user:user }
