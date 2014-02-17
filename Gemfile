@@ -42,6 +42,9 @@ gem 'httparty'
 # Saving API key
 gem "rails-settings-cached", "0.3.1"
 
+# JQuery library (JavaScript)
+gem 'jquery-turbolinks'
+
 
 group :test do
   gem 'rspec-rails', '~> 2.14.1'
@@ -49,6 +52,10 @@ group :test do
   gem 'capybara'
   gem 'launchy'
   gem 'webmock'
+  # For JS tests
+  gem 'selenium-webdriver'
+  # Database emptying after tests
+  gem 'database_cleaner', '< 1.1.0'
   # Line coverage
   gem 'simplecov', require: false
 end
