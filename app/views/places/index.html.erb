@@ -1,13 +1,13 @@
-<p id="notice"><%= notice %></p>
+<h1>Search for Places</h1>
 
 <%= form_tag places_path do %>
   city <%= text_field_tag :city, params[:city] %>
-  <%= submit_tag "Search" %>
+  <%= submit_tag "Search", class:"btn btn-primary" %>
 <% end %>
 
 <% if @places %>
 <h1><%= @places.first.city %></h1>
-  <table>
+  <table class="table table-hover">
     <thead>
       <tr>
         <th>Name</th>

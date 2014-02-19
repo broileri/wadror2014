@@ -7,4 +7,11 @@ class Style < ActiveRecord::Base
     def to_s
       "#{name}"
     end
+
+    def self.top(n)
+      # Yksittäisen tyylin keskiarvo: style.beers.inject(0) {|sum, beer| sum + beer.average_rating} / style.beers.count    
+      sorted_by_rating_in_desc_order = Style.all.sort_by{ |s| -(s.beers.inject(0) {|sum, beer| sum + beer.average_rating} / s.beers.count) } 
+      sorted_by_rating_in_desc_order.first(n)
+    end
+   
 end

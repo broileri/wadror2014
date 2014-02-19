@@ -45,6 +45,9 @@ gem "rails-settings-cached", "0.3.1"
 # JQuery library (JavaScript)
 gem 'jquery-turbolinks'
 
+# Bootstrap
+gem 'bootstrap-sass'
+
 
 group :test do
   gem 'rspec-rails', '~> 2.14.1'
@@ -63,6 +66,11 @@ end
 
 group :development, :test do
   gem 'sqlite3'
+end
+
+# Bootstrap
+group :development do
+  gem 'rails_layout'
 end
 
 group :production do

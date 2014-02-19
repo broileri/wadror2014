@@ -37,6 +37,6 @@ describe "Places" do
     fill_in('city', with: 'kumpula')
     click_button "Search"
 
-    expect(page).to have_content "No locations in kumpula city"
+    expect(page).to have_content "No locations in kumpula"
   end
 end

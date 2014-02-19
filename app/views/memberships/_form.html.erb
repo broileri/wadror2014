@@ -11,16 +11,16 @@
     </div>
   <% end %>
 
-  <% if @beer_clubs %>
+  <% if @beer_clubs.length > 0 %>
     <div class="field">
       <%= f.label :beer_club_id %><br>
       <%= f.select :beer_club_id, options_from_collection_for_select(@beer_clubs, :id, :to_s) %>
     </div>
     <div class="actions">
-      <%= f.submit %>
+      <%= f.submit class:"btn btn-primary" %>
     </div>
   <% else %>
-    <p>
+    <p class="alert alert-success">
       You're already a member in all available clubs!
     </p>
   <% end %>

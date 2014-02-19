@@ -28,6 +28,7 @@ describe "Beerlist page" do
 
   after :all do
     self.use_transactional_fixtures = true
+    Settings.beermapping_apikey = "36c62da788fb67d1e66aa049d4709a98"
   end
 
   it "shows a known beer", :js => true do

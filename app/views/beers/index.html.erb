@@ -1,6 +1,6 @@
 <h1>Beers</h1>
 
-<table>
+<table class="table table-hover">
   <thead>
     <tr>
       <th> <%= link_to 'Name', beers_path(order:"name") %> </th>
@@ -17,8 +17,8 @@
         <td><%= link_to beer, beer %></td>
         <td><%= beer.style %></td>
         <td><%= link_to beer.brewery, beer.brewery %></td>
-        <td><%= link_to 'Edit', edit_beer_path(beer) if current_user %></td>
-        <td><%= link_to 'Destroy', beer, method: :delete, data: { confirm: 'Are you sure?' } if current_is_admin %></td>
+        <td><%= link_to 'Edit', edit_beer_path(beer), class:'btn btn-warning white-text' if current_user %></td>
+        <td><%= link_to 'Destroy', beer, class:'btn btn-danger white-text', method: :delete, data: { confirm: 'Are you sure?' } if current_is_admin %></td>
       </tr>
     <% end %>
   </tbody>

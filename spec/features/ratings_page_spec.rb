@@ -15,9 +15,9 @@ describe "Ratings page" do
 
   it "shows the ratings that are in the database" do
   	visit ratings_path
-  	expect(page).to have_content "Iso 3, 11"
-  	expect(page).to have_content "Iso 3, 23"
-  	expect(page).to have_content "Alvi, 6"
+  	expect(page).to have_content "Iso 3 11"
+  	expect(page).to have_content "Iso 3 23"
+  	expect(page).to have_content "Alvi 6"
   end
 
   it "shows the number of ratings that are in the database" do

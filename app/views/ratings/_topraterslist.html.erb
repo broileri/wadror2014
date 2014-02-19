@@ -1,0 +1,20 @@
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th>User</th>    
+    <th>Ratings Count</th>
+    <th>Average Rating Given</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% users.each do |user| %>
+      <tr>
+        <td><%= link_to user, user %></td> 
+        <td><%= user.ratings.count %></td>       
+        <td><%= user.average_rating %></td>
+        
+      </tr>
+  <% end %>
+  </tbody>
+</table>

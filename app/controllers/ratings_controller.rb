@@ -2,6 +2,11 @@ class RatingsController < ApplicationController
 
   def index
   	@ratings = Rating.all
+    @recent_ratings = Rating.recent
+    @top_breweries = Brewery.top 3
+    @top_beers = Beer.top 3
+    @top_raters = User.top 3
+    @top_styles = Style.top 3
   end
 
   def new
@@ -26,8 +31,8 @@ class RatingsController < ApplicationController
   
   def destroy
     rating = Rating.find params[:id]
-    rating.delete if current_user == rating.user
-    redirect_to :back
+    rating.delete if current_user == rating.user 
+    redirect_to :back 
   end
 
 end

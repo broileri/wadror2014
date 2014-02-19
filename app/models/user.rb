@@ -35,6 +35,11 @@ class User < ActiveRecord::Base
       
   end
 
+  def self.top(n)
+   sorted_by_rating_count_in_desc_order = User.all.sort_by{ |b| -(b.ratings.count || 0) } 
+   sorted_by_rating_count_in_desc_order.first(n)
+  end
+
 
 
   private
