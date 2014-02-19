@@ -7,11 +7,10 @@
   </thead>
 
   <tbody>
-  <% styles.each do |style| %>
-      <tr>
-        <td><%= link_to style, style %></td>  
-        <td><%= style.beers.inject(0) {|sum, beer| sum + beer.average_rating} / style.beers.count %></td>
-        
+  <% scores.each do |score| %>
+      <tr>        
+        <td><%= score.last %></td> 
+        <td><%= score.first %></td>        
       </tr>
   <% end %>
   </tbody>

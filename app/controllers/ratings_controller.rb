@@ -6,7 +6,7 @@ class RatingsController < ApplicationController
     @top_breweries = Brewery.top 3
     @top_beers = Beer.top 3
     @top_raters = User.top 3
-    @top_styles = Style.top 3
+    @top_styles_ratings = Style.top_ratings 3
   end
 
   def new

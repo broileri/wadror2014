@@ -14,27 +14,27 @@
       <img src="./assets/0.8.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2014-02-19T03:23:44+02:00">2014-02-19T03:23:44+02:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2014-02-19T05:04:50+02:00">2014-02-19T05:04:50+02:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
         <div class="file_list_container" id="AllFiles">
   <h2>
     <span class="group_name">All Files</span>
-    (<span class="covered_percent"><span class="yellow">84.77%</span></span>
+    (<span class="covered_percent"><span class="yellow">84.75%</span></span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         2.47
+         2.46
        </span>
     </span> hits/line)
   </h2>
   <a name="AllFiles"></a>
   <div>
     <b>51</b> files in total.
-    <b>821</b> relevant lines. 
-    <span class="green"><b>696</b> lines covered</span> and
-    <span class="red"><b>125</b> lines missed </span>
+    <b>826</b> relevant lines. 
+    <span class="green"><b>700</b> lines covered</span> and
+    <span class="red"><b>126</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -282,12 +282,12 @@
       
       <tr>
         <td class="strong"><a href="#267528a21cc6c080d9bd130aab5050e91792f398" class="src_link" title="app/models/style.rb">app/models/style.rb</a></td>
-        <td class="green strong">100.0 %</td>
-        <td>17</td>
-        <td>9</td>
-        <td>9</td>
-        <td>0</td>
-        <td>3.3</td>
+        <td class="green strong">92.86 %</td>
+        <td>27</td>
+        <td>14</td>
+        <td>13</td>
+        <td>1</td>
+        <td>2.6</td>
       </tr>
       
       <tr>
@@ -611,7 +611,7 @@
         <li class="never" data-hits="" data-linenumber="4">
           
           
-          <code class="ruby">  # määritellään, että metodi current_user tulee käyttöön myös näkymissä</code>
+          <code class="ruby">  # määritellään, että metodit tulevat käyttöön myös näkymissä</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="5">
@@ -4857,11 +4857,11 @@
         <div class="source_table" id="267528a21cc6c080d9bd130aab5050e91792f398">
   <div class="header">
     <h3>app/models/style.rb</h3>
-    <h4><span class="green">100.0 %</span> covered</h4>
+    <h4><span class="green">92.86 %</span> covered</h4>
     <div>
-      <b>9</b> relevant lines. 
-      <span class="green"><b>9</b> lines covered</span> and
-      <span class="red"><b>0</b> lines missed.</span>
+      <b>14</b> relevant lines. 
+      <span class="green"><b>13</b> lines covered</span> and
+      <span class="red"><b>1</b> lines missed.</span>
     </div>
   </div>
   
@@ -4943,7 +4943,7 @@
         <li class="covered" data-hits="8" data-linenumber="13">
           <span class="hits">8</span>
           
-          <code class="ruby">      sorted_by_rating_in_desc_order = Style.all.sort_by{ |s| -(s.beers.inject(0) {|sum, beer| sum + beer.average_rating} / s.beers.count) } </code>
+          <code class="ruby">      sorted_by_rating_in_desc_order = Style.all.sort_by{ |s| -(s.beers.inject(0) {|sum, beer| sum + beer.average_rating} / (divisor(s.beers.count)) ) } </code>
         </li>
       
         <li class="covered" data-hits="2" data-linenumber="14">
@@ -4961,10 +4961,70 @@
         <li class="never" data-hits="" data-linenumber="16">
           
           
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="17">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    private</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="18">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="19">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    def self.divisor(d)</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="20">
+          <span class="hits">2</span>
+          
+          <code class="ruby">      if d &gt; 0</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="21">
+          <span class="hits">2</span>
+          
+          <code class="ruby">        d</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="22">
+          
+          
+          <code class="ruby">      else</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="23">
+          
+          
+          <code class="ruby">        1</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="24">
+          
+          
+          <code class="ruby">      end </code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="25">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="26">
+          
+          
           <code class="ruby">   </code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="17">
+        <li class="never" data-hits="" data-linenumber="27">
           
           
           <code class="ruby">end</code>
