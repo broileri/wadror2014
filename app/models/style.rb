@@ -10,8 +10,18 @@ class Style < ActiveRecord::Base
 
     def self.top(n)
       # Yksittäisen tyylin keskiarvo: style.beers.inject(0) {|sum, beer| sum + beer.average_rating} / style.beers.count    
-      sorted_by_rating_in_desc_order = Style.all.sort_by{ |s| -(s.beers.inject(0) {|sum, beer| sum + beer.average_rating} / (s.beers.count || 1) ) } 
+      sorted_by_rating_in_desc_order = Style.all.sort_by{ |s| -(s.beers.inject(0) {|sum, beer| sum + beer.average_rating} / (divisor(s.beers.count)) ) } 
       sorted_by_rating_in_desc_order.first(n)
+    end
+
+    private
+
+    def self.divisor(d)
+      if d > 0
+        d
+      else
+        1
+      end 
     end
    
 end
