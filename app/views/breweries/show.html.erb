@@ -21,7 +21,7 @@
 </p>
 
 <p>  
-  <%= link_to "Change Activity Status", toggle_activity_brewery_path(@brewery.id), method: :post, class: "btn btn-primary" %>
+  <%= link_to "Change Activity Status", toggle_activity_brewery_path(@brewery.id), method: :post, class: "btn btn-primary" if current_user %>
 </p>
 
 <p>
