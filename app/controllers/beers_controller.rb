@@ -16,6 +16,7 @@ class BeersController < ApplicationController
       when 'brewery' then @beers.sort_by!{ |b| b.brewery.name }
       when 'style' then @beers.sort_by!{ |b| b.style.name }
     end
+    
   end
 
   # GET /beers/1
