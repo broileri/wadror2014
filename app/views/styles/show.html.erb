@@ -12,8 +12,7 @@
     <% end %>
 </ul>
 
-<%= link_to 'Edit', edit_style_path(@style) if current_user %>
-<%= "|" if current_user %>
-<%= link_to 'Back', styles_path %>
+
+<%= link_to 'Back', styles_path, class:"btn white-text btn-info" %>
 <%= "|" if current_is_admin %>
-<%= link_to 'Destroy Style', @style, method: :delete, data: { confirm: 'Are you sure?' } if current_is_admin %>
+<%= edit_and_destroy_buttons(@style) %>

@@ -11,7 +11,7 @@
   <% beers.each do |beer| %>
       <tr>
         <td><%= link_to beer, beer %></td>        
-        <td><%= beer.average_rating %></td>
+        <td><%= round(beer.average_rating) %></td>
         <td><%= beer.ratings.count %></td>
       </tr>
   <% end %>

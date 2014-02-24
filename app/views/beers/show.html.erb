@@ -27,8 +27,6 @@
 
 <% end %>
 <br>
-<%= link_to 'Edit', edit_beer_path(@beer) if current_user %>
-<%= "|" if current_user %>
-<%= link_to 'Back', beers_path %>
+<%= link_to 'Back', beers_path, class:"btn white-text btn-info" %>
 <%= "|" if current_is_admin %>
-<%= link_to 'Destroy Beer', @beer, method: :delete, data: { confirm: 'Are you sure?' } if current_is_admin %>
+<%= edit_and_destroy_buttons(@beer) %>

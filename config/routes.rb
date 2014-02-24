@@ -11,6 +11,10 @@ Ratebeer::Application.routes.draw do
 
   resources :styles
 
+  resources :breweries do
+    post 'toggle_activity', on: :member
+  end
+
   root 'breweries#index'
 
   get 'kaikki_bisset', to: 'beers#index'

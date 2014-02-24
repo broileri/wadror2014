@@ -20,6 +20,10 @@
     <% end %>
 </p>
 
+<p>  
+  <%= link_to "Change Activity Status", toggle_activity_brewery_path(@brewery.id), method: :post, class: "btn btn-primary" %>
+</p>
+
 <p>
     <% if @brewery.ratings.empty? %>
         Has no ratings yet!
@@ -28,8 +32,7 @@
     <% end %>
 </p>
 
-<%= link_to 'Edit', edit_brewery_path(@brewery) if current_user %>
-<%= "|" if current_user %>
-<%= link_to 'Back', breweries_path %>
+
+<%= link_to 'Back', breweries_path, class:"btn white-text btn-info"  %>
 <%= "|" if current_is_admin %>
-<%= link_to 'Destroy Brewery', @brewery, method: :delete, data: { confirm: 'Are you sure?' } if current_is_admin %>
+<%= edit_and_destroy_buttons(@brewery) %>

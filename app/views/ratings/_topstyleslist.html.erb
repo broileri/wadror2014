@@ -10,7 +10,7 @@
   <% scores.each do |score| %>
       <tr>        
         <td><%= score.last %></td> 
-        <td><%= score.first %></td>        
+        <td><%= round(score.first) %></td>        
       </tr>
   <% end %>
   </tbody>

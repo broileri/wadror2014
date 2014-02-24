@@ -11,7 +11,7 @@
   <% ratings.each do |rating| %>
       <tr>
         <td><%= link_to rating.beer, rating.beer %></td>        
-        <td><%= rating.score %></td>
+        <td><%= round(rating.score) %></td>
         <td><%= link_to rating.user, rating.user %></td>
       </tr>
   <% end %>

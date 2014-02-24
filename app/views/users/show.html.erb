@@ -48,9 +48,9 @@
 
 
 
-<%= link_to 'Back', users_path %>
-<% if @user == current_user %>
+<%= link_to 'Back', users_path, class:"btn btn-info white-text" %>
+<% if @user == current_user || current_is_admin %>
   |
-  <%= link_to 'Edit', edit_user_path(@user) %> |
-  <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %>
+  <%= link_to 'Edit', edit_user_path(@user), class:"btn btn-primary white-text" %> |
+  <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger white-text" %>
 <% end %>

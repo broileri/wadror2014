@@ -48,6 +48,8 @@ gem 'jquery-turbolinks'
 # Bootstrap
 gem 'bootstrap-sass'
 
+gem 'rack-mini-profiler'
+
 
 group :test do
   gem 'rspec-rails', '~> 2.14.1'
